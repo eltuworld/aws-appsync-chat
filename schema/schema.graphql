@@ -1,0 +1,50 @@
+﻿type Messages {
+  createdAt: String!
+  id: ID!
+  message: String!
+  username: String!
+}
+
+type MessagesConnection {
+  items: [Messages]
+  nextToken: String
+}
+
+type Mutation {
+  createMessages(input: CreateMessagesInput!): Messages
+  deleteMessages(input: DeleteMessagesInput!): Messages
+  updateMessages(input: UpdateMessagesInput!): Messages
+}
+
+type Query {
+  getMessages(id: ID!): Messages
+  getallMessages: [Messages]
+  listMessages(after: String, first: Int): MessagesConnection
+}
+
+type Subscription {
+  onCreateMessages(createdAt: String, id: ID, message: String, username: String): Messages
+    @aws_subscribe(mutations:["createMessages"])
+  onDeleteMessages(createdAt: String, id: ID, message: String, username: String): Messages
+    @aws_subscribe(mutations:["deleteMessages"])
+  onUpdateMessages(createdAt: String, id: ID, message: String, username: String): Messages
+    @aws_subscribe(mutations:["updateMessages"])
+}
+
+input CreateMessagesInput {
+  createdAt: String!
+  id: ID!
+  message: String!
+  username: String!
+}
+
+input DeleteMessagesInput {
+  id: ID!
+}
+
+input UpdateMessagesInput {
+  createdAt: String
+  id: ID!
+  message: String
+  username: String
+}
