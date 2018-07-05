@@ -49,6 +49,3 @@ class AddMessage extends Component {
 }
 AddMessage = graphql(CreateMessageQuery)(AddMessage)
 export default AddMessage
-
-//export default graphql(POST_MUTATION, { name: 'createMessages' })(AddMessage)
-//export default AddMessage
